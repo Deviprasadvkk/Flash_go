@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: flashguard_redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    volumes:
+      - redis-data:/data
+  redpanda:
+    image: redpanda/redpanda:latest
+    container_name: flashguard_redpanda
+    command: ["redpanda", "start", "--overprovisioned", "--smp", "1", "--memory", "1G", "--reserve-memory", "0M", "--node-id", "0", "--check=false"]
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: flashguard_postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=flashguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+    driver: local

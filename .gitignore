@@ -1,0 +1,10 @@
+server
+loadtest
+server.log
+
+# Environment files
+.env
+.env.*
+
+# Go build/cache artifacts
+bin/
