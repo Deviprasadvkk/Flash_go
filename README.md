@@ -125,8 +125,3 @@ psql "postgres://postgres:postgres@localhost:5432/flashguard" -c "select * from 
 - Implement backpressure and circuit-breakers at the API gateway to protect internal systems.
 - Add integration tests that spin up the compose stack and run deterministic scenarios.
 
-**Contact / Notes**
-If a recruiter or engineer needs a walkthrough, start by reading [cmd/server/main.go](cmd/server/main.go) and then inspect the `internal` packages to see the abstractions and production-ready integrations.
-
----
-This README is written to be recruiter-friendly and highlights design choices and how to run the system locally.
